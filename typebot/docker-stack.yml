@@ -1,0 +1,70 @@
+version: "3.9"
+
+services:
+
+  typebot-builder:
+    image: baptistearno/typebot-builder:latest
+
+    environment:
+      DATABASE_URL: postgresql://admin:yGAnYX062@postgres:5432/automation
+
+      NEXTAUTH_URL: https://app.thiagocantalovo.com
+      NEXT_PUBLIC_VIEWER_URL: https://typebot.thiagocantalovo.com
+
+      ENCRYPTION_SECRET: 4BF,(f}CtT3R~y4udE)z,*cux,,/9<Pr
+
+      ADMIN_EMAIL: thiagocantalovo.nutri@gmail.com
+
+      SMTP_HOST: smtp.resend.com
+      SMTP_PORT: 465
+      SMTP_USERNAME: resend
+      SMTP_PASSWORD: re_A96FqcDf_Abg1rrkY69jiQXvRxkV5Drwn
+
+      NEXT_PUBLIC_SMTP_FROM: nutri@thiagocantalovo.com
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+      labels:
+        - traefik.enable=true
+
+        - traefik.http.routers.typebot-builder.rule=Host(`app.thiagocantalovo.com`)
+        - traefik.http.routers.typebot-builder.entrypoints=websecure
+        - traefik.http.routers.typebot-builder.tls.certresolver=le
+        - traefik.http.services.typebot-builder.loadbalancer.server.port=3000
+
+    networks:
+      - traefik_public
+
+  typebot-viewer:
+    image: baptistearno/typebot-viewer:latest
+
+    environment:
+      DATABASE_URL: postgresql://admin:yGAnYX062@postgres:5432/automation
+
+      NEXTAUTH_URL: https://app.thiagocantalovo.com
+      NEXT_PUBLIC_VIEWER_URL: https://typebot.thiagocantalovo.com
+
+      ENCRYPTION_SECRET: 4BF,(f}CtT3R~y4udE)z,*cux,,/9<Pr
+
+    deploy:
+      placement:
+        constraints:
+          - node.role == manager
+
+      labels:
+        - traefik.enable=true
+
+        - traefik.http.routers.typebot-viewer.rule=Host(`typebot.thiagocantalovo.com`)
+        - traefik.http.routers.typebot-viewer.entrypoints=websecure
+        - traefik.http.routers.typebot-viewer.tls.certresolver=le
+        - traefik.http.services.typebot-viewer.loadbalancer.server.port=3000
+
+    networks:
+      - traefik_public
+
+networks:
+  traefik_public:
+    external: true
