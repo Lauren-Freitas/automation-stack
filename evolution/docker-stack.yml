@@ -6,24 +6,28 @@ services:
     image: atendai/evolution-api:latest
 
     environment:
-      SERVER_URL: https://evolution.thiagocantalovo.com
+      SERVER_URL: "https://api.thiagocantalovo.com"
 
-      AUTHENTICATION_API_KEY: 2e09c9c7d80d306e315516eb12663031
+      AUTHENTICATION_API_KEY: ${EVOLUTION_API_KEY}
 
-      DATABASE_ENABLED: true
-      DATABASE_PROVIDER: mysql
+      DATABASE_ENABLED: "true"
+      DATABASE_PROVIDER: "mysql"
 
-      DATABASE_CONNECTION_URI: mysql://root:SenhaMysql123@mysql:3306/evolution
+      DATABASE_CONNECTION_URI: "mysql://root:${MYSQL_ROOT_PASSWORD}@mysql:3306/evolution"
 
-      REDIS_ENABLED: true
-      REDIS_URI: redis://redis:6379
+      REDIS_ENABLED: "true"
+      REDIS_URI: "redis://redis:6379"
 
-      CACHE_REDIS_ENABLED: true
-      CACHE_REDIS_URI: redis://redis:6379
+      CACHE_REDIS_ENABLED: "true"
+      CACHE_REDIS_URI: "redis://redis:6379"
 
-      SESSION_PHONE_CLIENT: Evolution
+      SESSION_PHONE_CLIENT: "Evolution"
 
-      CONFIG_SESSION_PHONE_VERSION: 2.3000.1023204200
+      CONFIG_SESSION_PHONE_VERSION: "2.3000.1023204200"
+
+      PROTOCOL: "https"
+
+      CORS_ORIGIN: "*"
 
     deploy:
       placement:
@@ -33,7 +37,7 @@ services:
       labels:
         - traefik.enable=true
 
-        - traefik.http.routers.evolution.rule=Host(`evolution.thiagocantalovo.com`)
+        - traefik.http.routers.evolution.rule=Host(`api.thiagocantalovo.com`)
         - traefik.http.routers.evolution.entrypoints=websecure
         - traefik.http.routers.evolution.tls.certresolver=le
         - traefik.http.services.evolution.loadbalancer.server.port=8080

@@ -6,19 +6,19 @@ services:
     image: baptistearno/typebot-builder:latest
 
     environment:
-      DATABASE_URL: postgresql://admin:yGAnYX062@postgres:5432/automation
+      DATABASE_URL: postgresql://${TYPEBOT_DB_USER}:${TYPEBOT_DB_PASSWORD}@postgres:5432/typebot
 
       NEXTAUTH_URL: https://app.thiagocantalovo.com
-      NEXT_PUBLIC_VIEWER_URL: https://typebot.thiagocantalovo.com
+      NEXT_PUBLIC_VIEWER_URL: https://chat.thiagocantalovo.com
 
-      ENCRYPTION_SECRET: 4BF,(f}CtT3R~y4udE)z,*cux,,/9<Pr
+      ENCRYPTION_SECRET: ${TYPEBOT_ENCRYPTION_SECRET}
 
       ADMIN_EMAIL: thiagocantalovo.nutri@gmail.com
 
       SMTP_HOST: smtp.resend.com
       SMTP_PORT: 465
       SMTP_USERNAME: resend
-      SMTP_PASSWORD: re_A96FqcDf_Abg1rrkY69jiQXvRxkV5Drwn
+      SMTP_PASSWORD: ${TYPEBOT_SMTP_PASSWORD}
 
       NEXT_PUBLIC_SMTP_FROM: nutri@thiagocantalovo.com
 
@@ -42,12 +42,12 @@ services:
     image: baptistearno/typebot-viewer:latest
 
     environment:
-      DATABASE_URL: postgresql://admin:yGAnYX062@postgres:5432/automation
+      DATABASE_URL: postgresql://${TYPEBOT_DB_USER}:${TYPEBOT_DB_PASSWORD}@postgres:5432/typebot
 
       NEXTAUTH_URL: https://app.thiagocantalovo.com
-      NEXT_PUBLIC_VIEWER_URL: https://typebot.thiagocantalovo.com
+      NEXT_PUBLIC_VIEWER_URL: https://chat.thiagocantalovo.com
 
-      ENCRYPTION_SECRET: 4BF,(f}CtT3R~y4udE)z,*cux,,/9<Pr
+      ENCRYPTION_SECRET: ${TYPEBOT_ENCRYPTION_SECRET}
 
     deploy:
       placement:
@@ -57,7 +57,7 @@ services:
       labels:
         - traefik.enable=true
 
-        - traefik.http.routers.typebot-viewer.rule=Host(`typebot.thiagocantalovo.com`)
+        - traefik.http.routers.typebot-viewer.rule=Host(`chat.thiagocantalovo.com`)
         - traefik.http.routers.typebot-viewer.entrypoints=websecure
         - traefik.http.routers.typebot-viewer.tls.certresolver=le
         - traefik.http.services.typebot-viewer.loadbalancer.server.port=3000
