@@ -1,50 +1,97 @@
-🚀 Automation Stack
+# 🚀 Automation Stack for Nutrition Clinics
 
-Production-ready self-hosted automation infrastructure powered by Docker Swarm.
+![Docker](https://img.shields.io/badge/Docker-Swarm-blue)
+![Traefik](https://img.shields.io/badge/Traefik-ReverseProxy-blueviolet)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue)
+![Redis](https://img.shields.io/badge/Redis-Cache-red)
+![Automation](https://img.shields.io/badge/Automation-Healthcare-success)
 
-This project provides a scalable and modular stack focused on workflow automation, chatbot infrastructure, WhatsApp integration, AI-ready services, and self-hosted cloud tools.
+Production-ready self-hosted automation infrastructure designed to support nutrition clinics, healthcare workflows, chatbot systems and AI-powered automations.
 
-📦 Stack Overview
-Core Infrastructure
-Traefik (Reverse Proxy + SSL)
-Docker Swarm
-Portainer
-Redis
-PostgreSQL
-MySQL
-MinIO (S3-compatible storage)
-⚡ Automation & AI
-n8n → workflow automation
-Evolution API → WhatsApp API integration
-Typebot → conversational chatbot builder
-pgvector → vector database support for AI applications
-🔐 Features
-Automatic HTTPS with Let's Encrypt
-Reverse proxy with Traefik
-Docker Swarm orchestration
-Persistent data volumes
-Overlay networking
-Environment variable management
-Self-hosted object storage
-AI-ready infrastructure
-Modular stack architecture
-Production-ready deployment structure
-🏗️ Architecture
+This stack powers:
+
+* patient communication
+* WhatsApp automation
+* workflow orchestration
+* chatbot experiences
+* media storage
+* AI-ready workflows
+* scalable self-hosted infrastructure
+
+---
+
+# ✨ Use Cases
+
+* Automated patient onboarding
+* Nutrition follow-up automation
+* WhatsApp appointment reminders
+* Lead qualification flows
+* AI-powered workflows
+* Chatbot-based support
+* Internal clinic automations
+* Secure self-hosted infrastructure
+
+---
+
+# 📦 Core Stack
+
+## Infrastructure
+
+* Traefik
+* Docker Swarm
+* Portainer
+* PostgreSQL
+* MySQL
+* Redis
+* MinIO
+
+## Automation & AI
+
+* n8n → workflow automation
+* Evolution API → WhatsApp integration
+* Typebot → conversational chatbot platform
+* pgvector → vector database for AI applications
+
+---
+
+# 🔐 Features
+
+* Automatic HTTPS with Let's Encrypt
+* Reverse Proxy Architecture
+* Persistent Volumes
+* Overlay Networking
+* Environment Variable Management
+* AI-ready Infrastructure
+* S3-compatible Storage
+* Modular Stack Design
+* Production-ready Deployment Structure
+
+---
+
+# 🏗️ Architecture
+
+```text id="c2q9nr"
 Internet
    │
    ▼
 Traefik (SSL + Reverse Proxy)
    │
-   ├── Portainer
-   ├── n8n
-   ├── Evolution API
    ├── Typebot
+   ├── Evolution API
+   ├── n8n
    ├── MinIO
+   ├── Portainer
    │
    ├── PostgreSQL
    ├── MySQL
    └── Redis
-📁 Project Structure
+```
+
+---
+
+# 📁 Project Structure
+
+```bash id="fz8f4f"
 automation-stack/
 │
 ├── traefik/
@@ -59,21 +106,23 @@ automation-stack/
 ├── minio/
 │
 ├── .env
+├── .gitignore
 └── README.md
-⚙️ Requirements
-Docker
-Docker Swarm
-Linux VPS
-Domain configured with DNS records
-Ports 80 and 443 open
-🚀 Deployment
+```
+
+---
+
+# 🚀 Deployment
 
 Initialize Docker Swarm:
 
+```bash id="i4x03l"
 docker swarm init
+```
 
-Deploy stacks:
+Deploy services:
 
+```bash id="bhh6m2"
 docker stack deploy -c docker-stack.yml traefik
 docker stack deploy -c docker-stack.yml postgres
 docker stack deploy -c docker-stack.yml mysql
@@ -84,49 +133,38 @@ docker stack deploy -c docker-stack.yml evolution
 docker stack deploy -c docker-stack.yml n8n
 docker stack deploy -c docker-stack.yml typebot
 docker stack deploy -c docker-stack.yml minio
-🔑 Environment Variables
+```
 
-All sensitive credentials are managed through .env.
+---
 
-Example:
+# 🔒 Security
 
-MYSQL_ROOT_PASSWORD=
-POSTGRES_PASSWORD=
-EVOLUTION_API_KEY=
-TYPEBOT_SMTP_PASSWORD=
-MINIO_ROOT_PASSWORD=
-📌 Services
-Service	Purpose
-Traefik	Reverse proxy and SSL
-Portainer	Docker management UI
-PostgreSQL	Main relational database
-MySQL	Evolution API database
-Redis	Cache and sessions
-Evolution API	WhatsApp integration
-n8n	Workflow automation
-Typebot	Chatbot platform
-MinIO	S3-compatible object storage
-pgvector	Vector database extension
-🔒 Security
-Secrets managed with environment variables
-HTTPS enabled with Let's Encrypt
-Services isolated through overlay networks
-Infrastructure versioned with Git
-📈 Future Improvements
-Docker Secrets
-CI/CD pipeline
-Automated backups
-Monitoring stack
-High availability nodes
-Infrastructure as Code improvements
+* Environment variable management
+* HTTPS enabled with Let's Encrypt
+* Isolated overlay networks
+* Infrastructure versioned with Git
+* Secrets removed from repository history
 
-📄 License
-This project is intended for educational and self-hosted automation purposes.
+---
 
+# 📈 Future Improvements
+
+* Docker Secrets
+* CI/CD pipelines
+* Monitoring stack
+* Automated backups
+* Multi-node Swarm cluster
+* Infrastructure as Code improvements
+
+---
 
 # 👩‍💻 Author
 
 Lauren Freitas
 
-- GitHub: https://github.com/Lauren-Freitas
-- LinkedIn: https://www.linkedin.com/in/laurend-freitas
+* GitHub: [https://github.com/Lauren-Freitas](https://github.com/Lauren-Freitas)
+* LinkedIn: [https://www.linkedin.com/in/lauren-freitas](https://www.linkedin.com/in/lauren-freitas)
+
+---
+
+Built for scalable healthcare automation, AI workflows and self-hosted infrastructure experiments.
